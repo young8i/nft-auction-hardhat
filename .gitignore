@@ -1,0 +1,27 @@
+# Remix 的编译输出目录
+artifacts/
+cache/
+
+# Hardhat / Foundry 等工具的临时文件（如果有用）
+out/
+broadcast/
+
+# node_modules 依赖（如果有 npm/yarn）
+node_modules/
+
+# 环境变量配置
+.env
+.env.*
+
+# 日志文件
+*.log
+
+# 系统文件
+.DS_Store
+Thumbs.db
+package-lock.json
+.deps
+
+# 临时文件
+*.tmp
+*.temp
