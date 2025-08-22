@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for contracts\PriceOracle.sol</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">contracts/</a> PriceOracle.sol
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">66.67% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>10/15</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">42.86% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>6/14</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">60% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>3/5</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">68.42% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>13/19</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+&nbsp;
+import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
+import {IERC20Metadata} from "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
+import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
+&nbsp;
+/// @title PriceOracle 价格预言机
+/// @notice 使用Chainlink feeds将ETH或ERC20的金额标准化为美元（8位小数）。
+contract PriceOracle is Ownable {
+    error NoFeed(address token);
+    error StalePrice(address token, uint256 updatedAt, uint256 maxDelay);
+    event FeedSet(address indexed token, address indexed aggregator);
+    event MaxDelaySet(uint256 seconds_);
+&nbsp;
+    // token -&gt; aggregator (ETH is address(0))
+    mapping(address =&gt; AggregatorV3Interface) public feeds;
+    // 新鲜度检查，尽可能的保证价格稳定
+    uint256 public maxDelay = 1 hours;
+&nbsp;
+    constructor(address owner_) Ownable(owner_) {}
+&nbsp;
+    function setFeed(address token, AggregatorV3Interface aggregator) external <span class="missing-if-branch" title="else path not taken" >E</span>onlyOwner {
+        feeds[token] = aggregator;
+        emit FeedSet(token, address(aggregator));
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function setMaxDelay(uint256 seconds_) external onlyOwner {</span>
+        maxDelay = seconds_;
+<span class="cstat-no" title="statement not covered" >        emit MaxDelaySet(seconds_);</span>
+    }
+&nbsp;
+    /// @notice 返回带有8位小数的“token”的“amount”的美元值。
+    function toUSD(address token, uint256 amount) public view returns (uint256 usdValue) {
+        AggregatorV3Interface aggr = feeds[token];
+        //如果没配置喂价，直接报错
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (address(aggr) == address(0)) revert NoFeed(token);
+        //获取最新价格
+        (, int256 price,, uint256 updatedAt,) = aggr.latestRoundData();
+        //如果价格太久没更新（超过 maxDelay 秒），则认为喂价过期，revert
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (updatedAt + maxDelay &lt; block.timestamp) revert StalePrice(token, updatedAt, maxDelay);
+        // 读取该喂价的精度，价格通常有8位小数
+        uint8 priceDecimals = aggr.decimals();
+        //这里直接要求 必须等于 8，否则报错（为了简化处理，不考虑其他精度的情况）
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(priceDecimals == 8, "Price decimals != 8"); 
+        uint256 p = uint256(price);
+        
+        if (token == address(0)) {//ETH
+            // ETH的数量单位是wei（1e18）
+            usdValue = amount * p / 1e18;
+        } else {
+            uint8 d = IERC20Metadata(token).decimals();
+            usdValue = amount * p / (10 ** d);
+        }
+    }
+&nbsp;
+    /// @notice Returns price (USD, 8 decimals), updatedAt
+<span class="fstat-no" title="function not covered" >    function getPrice(address token) external view returns (uint256, uint256) {</span>
+<span class="cstat-no" title="statement not covered" >        AggregatorV3Interface aggr = feeds[token];</span>
+<span class="cstat-no" title="statement not covered" >        if (address(aggr) == address(0)) revert NoFeed(token);</span>
+<span class="cstat-no" title="statement not covered" >        (, int256 price,, uint256 updatedAt,) = aggr.latestRoundData();</span>
+<span class="cstat-no" title="statement not covered" >        return (uint256(price), updatedAt);</span>
+    }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Aug 22 2025 22:20:02 GMT+0800 (中国标准时间)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

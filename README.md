@@ -42,7 +42,7 @@ npm run build
 npm test
 ```
 
-3. **部署（Sepolia 示例）**
+3. **部署（Sepolia ）**
 环境变量：
 ```
 SEPOLIA_RPC=...
@@ -89,7 +89,7 @@ npm run deploy:sepolia
 - `PriceOracle.setFeed(token, aggregator)`，`token = address(0)` 表示原生 ETH。
 - 强制要求价格喂价 **8 位小数**（Chainlink 常见配置），并带有**新鲜度检查**（默认 1 小时内）。
 
-### CCIP 跨链拍卖（示例骨架）
+### CCIP 跨链拍卖
 - `CrossChainGateway` 提供 `sendBid/ccipReceive` 的最小闭环，仅用于演示消息与资产的流动。
 - 生产中需要：
   - 配置真实的 Router 地址与受支持的 Token。
@@ -110,7 +110,8 @@ npm run deploy:sepolia
   - ETH/USDC 出价、USD 对比
   - 结束拍卖、手续费分配、NFT 转移
   - UUPS 升级到 `NftAuctionV2`
-> 你可以 `npm run coverage`（已预留命令）集成覆盖率工具，比如 `solidity-coverage`。
+> 👉 [查看完整测试覆盖率报告](https://github.com/young8i/nft-auction-hardhat/coverage/index.html)
+
 
 ## 常见问题
 - **为什么可以用多币种出价？** 因为统一转换为 USD 做比较，并记录每次出价时的 USD 值用于比较/计费。
@@ -119,19 +120,12 @@ npm run deploy:sepolia
 
 ---
 
-### 部署到测试网示例（Sepolia）
-1. 设置预言机地址（示意）：
-   - ETH/USD：`0x694AA1769357215DE4FAC081bf1f309aDC325306`（Sepolia）
-   - USDC/USD：查阅 Chainlink 文档或区块浏览器
-2. 调用：
+### 部署到测试网（Sepolia）
 ```ts
-await oracle.setFeed(ethers.ZeroAddress, "ETH_USD_FEED");
-await oracle.setFeed("USDC_ADDRESS", "USDC_USD_FEED");
-```
-3. 卖家：
-```ts
-await nft.approve(factory, tokenId);
-await factory.createAuction(nft, tokenId, 3600, 100n * 10n ** 8n);
+Deployer: 0x8Eb3757090317138143958586dc0F0D473cfa969
+Oracle: 0x2E9c6DccFd4ed92fb3185C805d6c2EA66BCE1dD1
+Auction implementation: 0xdA3B604aFFaBc26B41B07092541761D3542b795C
+Factory (proxy): 0xA7E79d76323fFc680dB266F79c14d6d0B653d803
 ```
 
 ## 许可证

@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for contracts\NftAuction.sol</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">contracts/</a> NftAuction.sol
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">69.39% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>34/49</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">44.44% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>24/54</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">66.67% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>8/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">75% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>45/60</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+&nbsp;
+import {IERC721} from "@openzeppelin/contracts/token/ERC721/IERC721.sol";
+import {IERC721Receiver} from "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
+import {IERC20, IERC20Metadata} from "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
+import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import {ReentrancyGuardUpgradeable} from "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
+import {UUPSUpgradeable} from "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import {Initializable} from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import {OwnableUpgradeable} from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import {PriceOracle} from "./PriceOracle.sol";
+&nbsp;
+interface IFactoryView {
+    function owner() external view returns (address);
+    function feeTo() external view returns (address);
+    function feeBpsFor(uint256) external view returns (uint16);
+}
+&nbsp;
+contract NftAuction is Initializable, ReentrancyGuardUpgradeable, UUPSUpgradeable, OwnableUpgradeable, IERC721Receiver {
+    using SafeERC20 for IERC20;
+&nbsp;
+    event BidPlaced(address indexed bidder, address indexed token, uint256 amount, uint256 usdValue);
+    event AuctionEnded(address winner, address token, uint256 amount, uint256 usdValue, uint16 feeBps);
+    event Cancelled();
+&nbsp;
+    IERC721 public nft;
+    uint256 public tokenId;
+    address public seller;
+    uint64 public startTime;
+    uint64 public endTime;
+    uint256 public startPriceUsd; // 8 decimals
+    PriceOracle public oracle;
+    address public factory;
+    //定义出价结构体
+    struct Bid {
+        address bidder;
+        address token; // address(0) for ETH
+        uint256 amount; // token units or wei
+        uint256 usdValue; // 8 decimals
+    }
+    //最高出价者
+    Bid public highest;
+&nbsp;
+    //最小加价usd
+    uint256 public minIncrementUsd; // optional 8 decimals
+&nbsp;
+    function initialize(
+        address factory_,
+        address seller_,
+        address nft_,
+        uint256 tokenId_,
+        uint64 startTime_,
+        uint64 endTime_,
+        uint256 startPriceUsd_,
+        address oracle_
+    ) external <span class="missing-if-branch" title="else path not taken" >E</span>initializer {
+&nbsp;
+        __ReentrancyGuard_init();
+        __UUPSUpgradeable_init();
+        __Ownable_init(msg.sender); // 作为所有者的部署者（工厂）；卖方单独存放
+        factory = factory_;
+        seller = seller_;
+        nft = IERC721(nft_);
+        tokenId = tokenId_;
+        startTime = startTime_;
+        endTime = endTime_;
+        startPriceUsd = startPriceUsd_;
+        oracle = PriceOracle(oracle_);
+        minIncrementUsd = 1_0000_0000; // default $1
+    }
+&nbsp;
+    function _authorizeUpgrade(address) internal view override {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(msg.sender == IFactoryView(factory).owner(), "not authorized");
+    }
+&nbsp;
+    modifier onlyActive() {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(block.timestamp &gt;= startTime &amp;&amp; block.timestamp &lt; endTime, "not active");
+        _;
+    }
+&nbsp;
+    function onERC721Received(address, address, uint256, bytes calldata) external pure override returns (bytes4) {
+        return IERC721Receiver.onERC721Received.selector;
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function timeLeft() external view returns (uint256) {</span>
+<span class="cstat-no" title="statement not covered" >        if (block.timestamp &gt;= endTime) <span class="cstat-no" title="statement not covered" >return 0;</span></span>
+<span class="cstat-no" title="statement not covered" >        return endTime - block.timestamp;</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function currentFeeBps() public view returns (uint16) {</span>
+<span class="cstat-no" title="statement not covered" >        return IFactoryView(factory).feeBpsFor(highest.usdValue);</span>
+    }
+&nbsp;
+    /// @notice ETH出价
+    function bidETH() external payable <span class="missing-if-branch" title="else path not taken" >E</span>onlyActive <span class="missing-if-branch" title="else path not taken" >E</span>nonReentrant {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(msg.value &gt; 0, "no value");
+        uint256 usd = oracle.toUSD(address(0), msg.value);
+        _placeBid(msg.sender, address(0), msg.value, usd);
+    }
+&nbsp;
+    /// @notice ERC20出价
+    function bidERC20(address token, uint256 amount) external <span class="missing-if-branch" title="else path not taken" >E</span>onlyActive <span class="missing-if-branch" title="else path not taken" >E</span>nonReentrant {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(amount &gt; 0, "no amount");
+        uint256 usd = oracle.toUSD(token, amount);
+        IERC20(token).safeTransferFrom(msg.sender, address(this), amount);
+        _placeBid(msg.sender, token, amount, usd);
+    }
+&nbsp;
+    function _placeBid(address bidder, address token, uint256 amount, uint256 usd) internal {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(usd &gt;= startPriceUsd, "below start price");
+        //当前没有人出价
+        if (highest.bidder == address(0)) {
+            // ok
+        } else {
+            require(usd &gt;= highest.usdValue + minIncrementUsd, "too low");
+        }
+        // 有人出价
+        if (highest.bidder != address(0)) {
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (highest.token == address(0)) {
+                (bool ok,) = highest.bidder.call{value: highest.amount}("");
+                <span class="missing-if-branch" title="else path not taken" >E</span>require(ok, "refund eth failed");
+            } else {
+<span class="cstat-no" title="statement not covered" >                IERC20(highest.token).safeTransfer(highest.bidder, highest.amount)</span>;
+            }
+        }
+        highest = Bid({bidder: bidder, token: token, amount: amount, usdValue: usd});
+        emit BidPlaced(bidder, token, amount, usd);
+    }
+&nbsp;
+    function endAuction() external <span class="missing-if-branch" title="else path not taken" >E</span>nonReentrant {
+        <span class="missing-if-branch" title="else path not taken" >E</span>require(block.timestamp &gt;= endTime, "not ended");
+        address _feeTo = IFactoryView(factory).feeTo();
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (highest.bidder == address(0)) {
+            // 没有出价
+<span class="cstat-no" title="statement not covered" >            nft.safeTransferFrom(address(this), seller, tokenId)</span>;
+<span class="cstat-no" title="statement not covered" >            emit Cancelled();</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+        // 给出价者转移 NFT
+        nft.safeTransferFrom(address(this), highest.bidder, tokenId);
+&nbsp;
+        // 支付，计算手续费费率
+        uint16 feeBps = IFactoryView(factory).feeBpsFor(highest.usdValue);
+        uint256 fee = highest.amount * feeBps / 10_000;
+        uint256 sellerAmt = highest.amount - fee;//卖方拍卖价
+&nbsp;
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (highest.token == address(0)) {
+            (bool ok1,) = _feeTo.call{value: fee}("");
+            <span class="missing-if-branch" title="else path not taken" >E</span>require(ok1, "fee eth failed");
+            (bool ok2,) = seller.call{value: sellerAmt}("");
+            <span class="missing-if-branch" title="else path not taken" >E</span>require(ok2, "payout eth failed");
+        } else {
+<span class="cstat-no" title="statement not covered" >            IERC20(highest.token).safeTransfer(_feeTo, fee)</span>;
+<span class="cstat-no" title="statement not covered" >            IERC20(highest.token).safeTransfer(seller, sellerAmt)</span>;
+        }
+&nbsp;
+        emit AuctionEnded(highest.bidder, highest.token, highest.amount, highest.usdValue, feeBps);
+    }
+&nbsp;
+    // 工厂所有者可以设置加价最小usd
+<span class="fstat-no" title="function not covered" >    function setMinIncrementUsd(uint256 newMin) external {</span>
+<span class="cstat-no" title="statement not covered" >        require(msg.sender == IFactoryView(factory).owner() || msg.sender == seller, "no auth")</span>;
+        minIncrementUsd = newMin;
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function rescueToken(address token, uint256 amount, address to) external onlyOwner {</span>
+        // 仅合约 owner可提走误转到本合约的资产（包括 ETH）；不限制时机，因此需信任工厂方。
+<span class="cstat-no" title="statement not covered" >        if (token == address(0)) {</span>
+<span class="cstat-no" title="statement not covered" >            (bool ok,) = to.call{value: amount}("");</span>
+<span class="cstat-no" title="statement not covered" >            require(ok, "withdraw eth failed")</span>;
+        } else {
+<span class="cstat-no" title="statement not covered" >            IERC20(token).safeTransfer(to, amount)</span>;
+        }
+    }
+&nbsp;
+    receive() external payable {}
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Aug 22 2025 22:20:02 GMT+0800 (中国标准时间)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
