@@ -20,6 +20,7 @@ function getEventArg<T = any>(
 
 describe("NFT Auction Market", function () {
   it("ETH & ERC20 bidding, USD comparison, end & payout", async () => {
+    //获取签署者
     const [deployer, seller, bidder1, bidder2, feeTo] = await ethers.getSigners();
 
     // Oracle + feeds: ETH/USD = $3000, USDC/USD = $1
@@ -36,7 +37,7 @@ describe("NFT Auction Market", function () {
     const usdc = await MockERC20.deploy("Mock USDC", "USDC", 6);
     await oracle.setFeed(await usdc.getAddress(), await usdcAgg.getAddress());
 
-    // Deploy Auction impl + Factory (UUPS)
+    // 部署拍卖实现合约和工厂合约 （UUPS）
     const AuctionImpl = await ethers.getContractFactory("NftAuction");
     const impl = await AuctionImpl.deploy();
     await impl.waitForDeployment();
@@ -54,7 +55,7 @@ describe("NFT Auction Market", function () {
     const nft = await MyNFT.deploy("MyNFT", "MNFT", "");
     await nft.waitForDeployment();
 
-    // ✅ 由 deployer（当前 owner）把所有权移交给 seller，然后由 seller 铸造
+    // 由 deployer（当前 owner）把所有权移交给 seller，然后由 seller 铸造
     await nft.transferOwnership(seller.address);
     await nft.connect(seller).mint(seller.address);
 
@@ -68,7 +69,7 @@ describe("NFT Auction Market", function () {
       .createAuction(await nft.getAddress(), tokenId, 3600, startPriceUsd);
     const receipt = await tx.wait();
 
-    // ✅ 用接口安全解析事件，拿到拍卖地址
+    // 用接口安全解析事件，拿到拍卖地址
     const auctionAddr = getEventArg<string>(
       receipt,
       Factory.interface,
@@ -80,27 +81,38 @@ describe("NFT Auction Market", function () {
     // Bidder1 bids 0.05 ETH ($150) -> should be highest
     await auction.connect(bidder1).bidETH({ value: ethers.parseEther("0.05") });
 
-    // Bidder2 bids 120 USDC ($120) -> lower than 150 -> revert
+    // 确保 Bidder2 钱包里有足够的 USDC 来参与竞拍
     await usdc.connect(deployer).transfer(bidder2.address, 1_000_000n * 10n ** 6n);
+    // 授权拍卖合约花费代币
     await usdc.connect(bidder2).approve(auctionAddr, 10n ** 24n);
     await expect(
       auction.connect(bidder2).bidERC20(await usdc.getAddress(), 120n * 10n ** 6n)
     ).to.be.revertedWith("too low");
 
-    // Bidder2 bids 0.06 ETH ($180) -> becomes highest, refund previous
+    // 检查 BidPlaced 事件是否被触发
     await expect(
       auction.connect(bidder2).bidETH({ value: ethers.parseEther("0.06") })
     ).to.emit(auction, "BidPlaced");
 
-    // Fast-forward time and end
+    // 时间快进4000秒 > 1小时 模拟拍卖到期
+    // ethers.provider → 当前使用的以太坊节点提供者（Hardhat 内置的 JSON-RPC Provider）直接调用 JSON-RPC 接口，发送一条“原生请求”
+
+    /**evm_increaseTime 是 Hardhat/ Ganache 提供的测试 RPC 方法。
+      参数 [4000] 表示让区块时间快进 4000 秒（相当于模拟过了 ~1小时+）。
+      这样可以测试「拍卖到期」之类的逻辑，而不用真的等一个小时 */
     await ethers.provider.send("evm_increaseTime", [4000]);
+    /** evm_mine：立刻挖出一个新的区块。
+      因为 EVM 里「时间」只会在挖新区块时才生效，单独增加时间不会马上生效，必须再挖一次区块。
+      所以通常 increaseTime + mine 要配合使用。 */
     await ethers.provider.send("evm_mine", []);
 
+    // 确认 feeTo 地址余额增加，也就是手续费到账。
     const feeToBalBefore = await ethers.provider.getBalance(feeTo.address);
     await expect(auction.endAuction()).to.emit(auction, "AuctionEnded");
     const feeToBalAfter = await ethers.provider.getBalance(feeTo.address);
 
     expect(feeToBalAfter).to.be.gt(feeToBalBefore);
+    // 确认最终拍卖结束后的nft所有者是否未bidder2
     expect(await nft.ownerOf(tokenId)).to.eq(bidder2.address);
   });
 
@@ -131,7 +143,7 @@ describe("NFT Auction Market", function () {
     const nft = await MyNFT.deploy("MyNFT", "MNFT", "");
     await nft.waitForDeployment();
 
-    // ✅ 由 deployer 把 owner 移交给 seller，然后 seller mint
+    // 由 deployer 把 owner 移交给 seller，然后 seller mint
     await nft.transferOwnership(seller.address);
     await nft.connect(seller).mint(seller.address);
     await nft.connect(seller).approve(await factory.getAddress(), 1);
@@ -157,7 +169,7 @@ describe("NFT Auction Market", function () {
     const v2 = await AuctionV2.deploy();
     await v2.waitForDeployment();
 
-    // ✅ 用最小 ABI 调用 UUPS 升级（由 factory.owner() 调用）
+    // 用最小 ABI 调用 UUPS 升级（由 factory.owner() 调用）
     const UUPS_MIN_ABI = ["function upgradeToAndCall(address newImplementation, bytes data)"];
     const upgrader = new ethers.Contract(auctionAddr, UUPS_MIN_ABI, deployer);
     await upgrader.upgradeToAndCall(await v2.getAddress(), "0x");
